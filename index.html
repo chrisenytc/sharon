@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SharonApp">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sharon</title>
+		<!-- Bootstrap -->
+		<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Styles -->
+		<link rel="stylesheet" href="src/css/style.css">
+		<script type="text/ng-template" id="views/index.html">
+			<div ng-if="context" class="voice-context">
+				<p class="lead">"{{ context }}"</p>
+			</div>
+
+			<div class="footer">
+				<div id="voice-container" class="voice-container"></div>
+			</div>
+		</script>
+		<script type"text/ng-template" id="views/settings.html">
+			<div>Testings settings</div>
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="menu-header">
+				<div class="row">
+					<div class="col-xs-4">
+						<a href ui-sref="settings" title="Settings"><span class="glyphicon glyphicon-cog pull-left" aria-hidden="true"></span></a>
+					</div>
+					<div class="col-xs-4">Sharon</div>
+					<div class="col-xs-4">
+						<a href ui-sref="exit" title="Exit"><span class="glyphicon glyphicon-off pull-right" aria-hidden="true"></span></a>
+					</div>
+				</div>
+			</div>
+			<div ui-view></div>
+		</div>
+		<!-- Annyang Lib -->
+		<script src="dependencies/annyang.js"></script>
+		<!-- Siri Wave Lib -->
+		<script src="dependencies/siriwave.js"></script>
+		<!-- Application Base -->
+		<script>
+			(function() {
+				window.$ = window.jQuery = require('jquery');
+				window.bootstrap = require('bootstrap');
+				window.angular = require('angular');
+				window.angularRouter = require('angular-ui-router');
+			})();
+		</script>
+		<!-- Main Application -->
+		<script>
+			(function() {
+					window.App = angular.module('SharonApp', [angularRouter]);
+					//Configuration
+					window.App.config(['$stateProvider', '$urlRouterProvider',
+							function ($stateProvider, $urlRouterProvider) {
+								'use strict';
+								//404
+								$urlRouterProvider.otherwise('/');
+								//Routes
+								$stateProvider
+									.state('index', {
+										url: '/',
+										templateUrl: 'views/index.html',
+										controller: 'indexCtrl'
+									})
+								.state('settings', {
+									url: '/settings',
+									templateUrl: 'views/settings.html',
+									controller: 'settingCtrl'
+								});
+							}
+					]);
+					//Require
+					require('./src/app/services/waveFactory')(App, window);
+					require('./src/app/controllers/indexCtrl')(App, window);
+					require('./src/app/controllers/settingCtrl')(App, window);
+
+				})();
+		</script>
+	</body>
+</html>
