@@ -38,6 +38,10 @@ body {
 	margin-top: 10px;
 }
 
+.config-padding {
+	padding: 20px;
+}
+
 .voice-context {
 	margin-top: 25px;
 }

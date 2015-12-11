@@ -33,8 +33,10 @@
     "angular": "^1.4.7",
     "angular-ui-router": "^0.2.15",
     "bootstrap": "^3.3.5",
+    "font-awesome": "^4.4.0",
     "jquery": "^2.1.4",
-    "menubar": "^2.2.1"
+    "menubar": "^2.2.1",
+    "superagent": "^1.4.0"
   },
   "devDependencies": {
     "electron-packager": "^5.1.0",

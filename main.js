@@ -8,7 +8,7 @@ var menubar = require('menubar');
 
 require('crash-reporter').start();
 
-var mb = menubar({
+var mb = global.mb = menubar({
 	width: 350,
 	height: 160,
 	y: 30,
